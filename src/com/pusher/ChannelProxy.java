@@ -37,15 +37,19 @@ public class ChannelProxy extends KrollProxy
 					try {
 						JSONObject message = new JSONObject(bundleData.getString("message"));
 						
+						KrollDict event = new KrollDict();
+						event.put("name", message.getString("event"));
+						event.put("channel", message.getString("channel"));
+						
+						JSONObject data = new JSONObject(message.getString("data"));
+						event.put("data", data);
+						
 						if(ChannelProxy.this.hasListeners(message.getString("event"))) {
-							KrollDict event = new KrollDict();
-							event.put("name", message.getString("event"));
-							event.put("channel", message.getString("channel"));
-							
-							JSONObject data = new JSONObject(message.getString("data"));
-							event.put("data", data);
-							
 							ChannelProxy.this.fireEvent(message.getString("event"), event);
+						}
+						
+						if(ChannelProxy.this.hasListeners("event")) {
+							ChannelProxy.this.fireEvent("event", event);
 						}
 					} catch(Exception e) {
 						e.printStackTrace();
