@@ -8,11 +8,14 @@
  */
 package com.pusher;
 
+import java.util.HashMap;
+
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
-import org.appcelerator.titanium.TiContext;
-import org.appcelerator.titanium.util.Log;
+import org.appcelerator.kroll.common.Log;
+import org.appcelerator.titanium.util.TiConvert;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -36,8 +39,8 @@ public class PusherModule extends KrollModule
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant public static final String EXTERNAL_NAME = value;
 	
-	public PusherModule(TiContext tiContext) {
-		super(tiContext);
+	public PusherModule() {
+		super();
 	}
 	
 	@Override
@@ -52,7 +55,10 @@ public class PusherModule extends KrollModule
 
 	// Methods
 	@Kroll.method
-	public void setup(KrollDict args) {
+	public void setup(@SuppressWarnings("rawtypes") HashMap map) {
+    @SuppressWarnings("unchecked")
+	  KrollDict args = new KrollDict(map);
+
 		mPusherKey = args.getString("key");
 		mReconnectAutomatically = args.optBoolean("reconnectAutomatically", true);
 		mReconnectDelay = args.optInt("reconnectDelay", 5);
@@ -89,7 +95,7 @@ public class PusherModule extends KrollModule
 							event.put("name", message.getString("event"));
 							
 							JSONObject data = new JSONObject(message.getString("data"));
-							event.put("data", data);
+							event.put("data", KrollDict.fromJSON(data));
 							
 							PusherModule.this.fireEvent(message.getString("event"), event);
 						}
@@ -118,16 +124,18 @@ public class PusherModule extends KrollModule
 	
 	@Kroll.method(runOnUiThread=true)
 	public ChannelProxy subscribeChannel(String channel) {
-		ChannelProxy channelProxy = new ChannelProxy(this.context);
+		ChannelProxy channelProxy = new ChannelProxy();
 		channelProxy.configure(this, channel);
 		
 		return channelProxy;
 	}
 	
 	@Kroll.method
-	public void sendEvent(String eventName, String channelName, KrollDict data) {
+	public void sendEvent(String eventName, String channelName, Object data) throws org.json.JSONException {
+    JSONObject jsonData = new JSONObject(TiConvert.toString(data));
+
 		if(mPusherAPI != null) {
-			mPusherAPI.triggerEvent(eventName, channelName, data, mPusher.mSocketId);
+			mPusherAPI.triggerEvent(eventName, channelName, jsonData, mPusher.mSocketId);
 		} else {
 			Log.w("Pusher", "PusherAPI not configured because of missing appID or secret");
 		}
