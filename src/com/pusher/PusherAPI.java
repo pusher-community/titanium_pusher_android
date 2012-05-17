@@ -14,7 +14,6 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.appcelerator.kroll.KrollDict;
 import org.json.JSONObject;
 
 public class PusherAPI {
@@ -30,9 +29,9 @@ public class PusherAPI {
 		this.secretKey = secretKey;
 	}
 	
-	public void triggerEvent(String eventName, String channelName, KrollDict data, String socketID) {
+	public void triggerEvent(String eventName, String channelName, JSONObject data, String socketID) {
 		String path = "/apps/" + this.appID + "/channels/" + channelName + "/events";
-		String bodyString = new JSONObject(data).toString();
+		String bodyString = data.toString();
 		
 		StringBuffer buffer = new StringBuffer();
 		// Auth key

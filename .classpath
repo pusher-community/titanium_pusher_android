@@ -5,8 +5,12 @@
 	<classpathentry excluding="com/emorym/android_pusher/PusherSampleActivity.java" kind="src" path="Android_Pusher/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/rubenfonseca/Downloads/android-sdk-mac_x86/platforms/android-7/android.jar"/>
-	<classpathentry kind="lib" path="/Users/rubenfonseca/Downloads/android-sdk-mac_x86/add-ons/addon_google_apis_google_inc_7/libs/maps.jar"/>
-	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.7.3/android/titanium.jar"/>
-	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.7.3/android/js.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.1/android/js.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.1/android/kroll-apt.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.1/android/kroll-common.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.1/android/kroll-rhino.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.1/android/kroll-v8.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.1/android/thirdparty.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.1/android/titanium.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
