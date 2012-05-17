@@ -7,6 +7,7 @@ description: Titanium Mobile module for the Pusher.com service
 author: Ruben Fonseca
 license: Specify your license
 copyright: Copyright (c) 2011 by Pusher
+apiversion: 2
 
 
 # these should not be edited
@@ -14,4 +15,4 @@ name: pusher
 moduleid: com.pusher
 guid: 58221445-47e3-426f-af05-2f7462ec26b5
 platform: android
-minsdk: 1.7.5
+minsdk: 1.8.0.1
